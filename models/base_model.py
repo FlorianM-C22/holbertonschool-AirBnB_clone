@@ -17,8 +17,7 @@ class BaseModel:
         """
         Constructor for the BaseModel class
         """
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        self.created_at = self.updated_at = datetime.now()
         self.id = str(uuid.uuid4())
 
     def __str__(self):
