@@ -44,6 +44,6 @@ class BaseModel:
         """
         new_dict = self.__dict__.copy()
         new_dict["__class__"] = self.__class__.__name__
-        new_dict["updated_at"] = self.updated_at.isoformat(sep='T')
-        new_dict["created_at"] = self.created_at.isoformat(sep='T')
+        new_dict["created_at"] = self.created_at.isoformat()
+        new_dict["updated_at"] = self.updated_at.isoformat()
         return new_dict
