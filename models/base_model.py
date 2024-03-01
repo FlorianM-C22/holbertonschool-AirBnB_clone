@@ -12,9 +12,8 @@ from datetime import datetime
 
 class BaseModel:
     """
-    Base class for other classes to be used in the project
+    Base class
     """
-
     def __init__(self, *args, **kwargs):
         """
         Constructor for the BaseModel class
@@ -39,14 +38,14 @@ class BaseModel:
 
     def save(self):
         """
-        Updates the public instance attribute updated_at with the current
-        datetime"""
+        Updates the public instance attribute with current datetime
+        """
         self.updated_at = datetime.now()
 
     def to_dict(self):
         """
-        Returns a dictionary containing all keys/values of __dict__ of the
-        instance"""
+        Returns a dictionary containing all keys/values of __dict__
+        """
         new_dict = self.__dict__.copy()
         new_dict["__class__"] = self.__class__.__name__
         new_dict["created_at"] = self.created_at.isoformat()
