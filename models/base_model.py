@@ -8,11 +8,12 @@ BaseModel class module
 
 import uuid
 from datetime import datetime
+import models
 
 
 class BaseModel:
     """
-    Base class
+    BaseModel class
     """
     def __init__(self, *args, **kwargs):
         """
@@ -20,7 +21,7 @@ class BaseModel:
         """
         if kwargs is not None and len(kwargs) != 0:
             for key, value in kwargs.items():
-                if key in ["crearted_at", "updated_at"]:
+                if key in ["created_at", "updated_at"]:
                     value = datetime.fromisoformat(value)
                 if key != "__class__":
                     setattr(self, key, value)
@@ -28,6 +29,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """
@@ -41,6 +43,7 @@ class BaseModel:
         Updates the public instance attribute with current datetime
         """
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """
