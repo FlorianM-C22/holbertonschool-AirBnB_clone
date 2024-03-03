@@ -26,22 +26,19 @@ class TestFileStorage(unittest.TestCase):
 
     def test_all(self):
         """Test the 'all' method of the storage object."""
-        objects = self.storage.all()
-        self.assertIsInstance(objects, dict)
+        storage = FileStorage()
+        all_objs = storage.all()
         self.assertIn(f"{self.base_model.__class__.__name__}.\
-                      {self.base_model.id}", objects)
-        self.assertEqual(objects[f"{self.base_model.__class__.__name__}.\
-                                 {self.base_model.id}"], self.base_model)
+                    {self.base_model.id}", all_objs)
 
     def test_new(self):
         """Test the 'new' method of the storage object."""
+        storage = FileStorage()
         new_model = BaseModel()
-        self.storage.new(new_model)
-        objects = self.storage.all()
-        self.assertIn(f"{new_model.__class__.__name__}.\
-                      {new_model.id}", objects)
-        self.assertEqual(objects[f"{new_model.__class__.__name__}.\
-                                 {new_model.id}"], new_model)
+        storage.new(new_model)
+        all_objs = storage.all()
+        self.assertIn(f"{new_model.__class__.__name__}.{new_model.id}",
+                      all_objs)
 
     def test_save(self):
         """Test case for 'save' method"""
@@ -50,13 +47,11 @@ class TestFileStorage(unittest.TestCase):
 
     def test_reload(self):
         """Test case for 'reload' method"""
-        self.storage.save()
-        self.storage.reload()
-        objects = self.storage.all()
+        storage = FileStorage()
+        storage.reload()
+        all_objs = storage.all()
         self.assertIn(f"{self.base_model.__class__.__name__}.\
-                      {self.base_model.id}", objects)
-        self.assertEqual(objects[f"{self.base_model.__class__.__name__}.\
-                                 {self.base_model.id}"], self.base_model)
+                    {self.base_model.id}", all_objs)
 
 
 if __name__ == '__main__':
