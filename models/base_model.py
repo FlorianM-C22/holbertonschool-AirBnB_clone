@@ -1,24 +1,14 @@
 #!/usr/bin/python3
-"""
--
-BaseModel class module
--
-"""
-
-
+"""This file contains the parent class BaseModel"""
 import uuid
 from datetime import datetime
 import models
 
 
 class BaseModel:
-    """
-    BaseModel class
-    """
+    """ BaseModel class """
     def __init__(self, *args, **kwargs):
-        """
-        Constructor for the BaseModel class
-        """
+        """ __init__ constructor method for the BaseModel class """
         if kwargs is not None and len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key in ["created_at", "updated_at"]:
@@ -33,7 +23,9 @@ class BaseModel:
 
     def __str__(self):
         """
-        Returns a string representation of the object
+        __str__ method that returns a string representation of the instance
+        Returns:
+        [str]: string representation of the instance BaseModel
         """
         return ("[{}] ({}) {}".format(self.__class__.__name__,
                                       self.id, self.__dict__))
@@ -47,7 +39,9 @@ class BaseModel:
 
     def to_dict(self):
         """
-        Returns a dictionary containing all keys/values of __dict__
+        to_dict method that returns a dictionary representation of the instance
+        Returns:
+        [dict]: dictionary representation of the instance BaseModel
         """
         new_dict = self.__dict__.copy()
         new_dict["__class__"] = self.__class__.__name__
