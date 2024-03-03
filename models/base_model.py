@@ -1,14 +1,17 @@
 #!/usr/bin/python3
 """This file contains the parent class BaseModel"""
+
 import uuid
 from datetime import datetime
 import models
 
 
 class BaseModel:
-    """ BaseModel class """
+    """BaseModel class"""
     def __init__(self, *args, **kwargs):
-        """ __init__ constructor method for the BaseModel class """
+        """
+        __init__ constructor method for the BaseModel class
+        """
         if kwargs is not None and len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key in ["created_at", "updated_at"]:
