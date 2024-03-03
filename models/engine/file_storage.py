@@ -1,9 +1,5 @@
 #!/usr/bin/python3
-"""
--
-FileStorage class module
--
-"""
+"""FileStorage class module"""
 
 import json
 
