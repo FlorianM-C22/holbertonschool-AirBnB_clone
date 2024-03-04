@@ -16,6 +16,11 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     class_dict = {
         "BaseModel": BaseModel,
+        "User": "User",
+        "State": "State",
+        "City": "City",
+        "Amenity": "Amenity",
+        "Place": "Place",
     }
 
     def do_quit(self, arg):
