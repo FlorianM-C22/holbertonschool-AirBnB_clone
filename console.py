@@ -12,12 +12,12 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
     class_dict = {
         "BaseModel": BaseModel,
-        #"User": User,
-        #"State": State,
-        #"City": City,
-        #"Amenity": Amenity,
-        #"Place": Place,
-        #"Review": Review
+        # "User": User,
+        # "State": State,
+        # "City": City,
+        # "Amenity": Amenity,
+        # "Place": Place,
+        # "Review": Review
     }
 
     def do_quit(self, arg):
@@ -98,6 +98,7 @@ class HBNBCommand(cmd.Cmd):
                 if type(obj).__name__ == cls_name:
                     obj_list.append(str(obj))
             print(obj_list)
+
 
 if __name__ == '__main__':
     try:
