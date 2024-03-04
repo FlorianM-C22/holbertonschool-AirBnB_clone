@@ -21,7 +21,7 @@ class FileStorage:
         """
         Sets obj in __objects
         """
-        key = f"{obj.__class__.__name__}obj.id"
+        key = f"{obj.__class__.__name__}.{obj.id}"
         self.__objects[key] = obj
 
     def save(self):
@@ -36,8 +36,7 @@ class FileStorage:
         Deserializes the JSON file to __objects
         """
         try:
-            if self.__file_path is not None:
-                with open("__file_path", "r", encoding="utf-8") as f:
-                    json.load(self.__object, f)
+            with open(self.__file_path, "r", encoding="utf-8") as f:
+                self.__objects = json.load(f)
         except FileNotFoundError:
             pass
