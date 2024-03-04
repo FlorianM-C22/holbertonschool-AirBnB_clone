@@ -7,46 +7,40 @@
 
 ---
 
-## Description :house:
 
-HolbertonBnB is a complete web application, integrating database storage,
-a back-end API, and front-end interfacing in a clone of AirBnB.
+## Table of Content
+* [Description](#description)
+* [Storage](#storage)
+* [Console](#console)
+* [Testing](#testing)
+* [Authors](#authors)
 
-The project currently only implements the back-end console.
+## Installation
+* Clone this repository: `git clone "https://github.com/FlorianM-C22/holbertonschool-AirBnB_clone"`
+* Access AirBnb directory: `cd holbertonschool-AirBnB_clone`
+* Interactive Mode: `./console`
+* Non-Interactive Mode: `echo "<command>" | ./console.py`
 
-## Classes :cl:
+## Description
 
-HolbertonBnB utilizes the following classes:
+HolbertonBnB is a comprehensive web application that replicates the functionality of AirBnB, incorporating database storage, a backend API, and frontend interface.
+Currently, the project focuses on the backend console.
 
-|     | BaseModel | FileStorage | User | State | City | Amenity | Place | Review |
-| --- | --------- | ----------- | -----| ----- | -----| ------- | ----- | ------ |
-| **PUBLIC INSTANCE ATTRIBUTES** | `id`<br>`created_at`<br>`updated_at` | | Inherits from `BaseModel` | Inherits from `BaseModel` | Inherits from `BaseModel` | Inherits from `BaseModel` | Inherits from `BaseModel` | Inherits from `BaseModel` |
-| **PUBLIC INSTANCE METHODS** | `save`<br>`to_dict` | `all`<br>`new`<br>`save`<br>`reload` | "" | "" | "" | "" | "" | "" |
-| **PUBLIC CLASS ATTRIBUTES** | | | `email`<br>`password`<br>`first_name`<br>`last_name`| `name` | `state_id`<br>`name` | `name` | `city_id`<br>`user_id`<br>`name`<br>`description`<br>`number_rooms`<br>`number_bathrooms`<br>`max_guest`<br>`price_by_night`<br>`latitude`<br>`longitude`<br>`amenity_ids` | `place_id`<br>`user_id`<br>`text` |
-| **PRIVATE CLASS ATTRIBUTES** | | `file_path`<br>`objects` | | | | | | |
+## Storage
 
-## Storage :baggage_claim:
+The data classes are managed by a storage engine abstracted in the FileStorage class, defined in models/engine/file_storage.py. Whenever the backend initializes, HolbertonBnB creates an instance of FileStorage named storage.
+This object is loaded or reloaded from instances of classes stored in the JSON file `file.json`.
+As class instances are created, updated, or deleted, the storage object reflects these changes in `file.json`.
 
-The above classes are handled by the abstracted storage engine defined in the
-[FileStorage](./models/engine/file_storage.py) class.
+## Console
 
-Every time the backend is initialized, HolbertonBnB instantiates an instance of
-`FileStorage` called `storage`. The `storage` object is loaded/re-loaded from
-any class instances stored in the JSON file `file.json`. As class instances are
-created, updated, or deleted, the `storage` object is used to register
-corresponding changes in the `file.json`.
-
-## Console :computer:
-
-The console is a command line interpreter that permits management of the backend
-of HolbertonBnB. It can be used to handle and manipulate all classes utilized by
-the application (achieved by calls on the `storage` object defined above).
+The console serves as a command-line interpreter to manage the backend of HolbertonBnB.
+It allows manipulation of all classes used by the application through interactions with the storage object.
 
 ### Using the Console
 
-The HolbertonBnB console can be run both interactively and non-interactively.
-To run the console in non-interactive mode, pipe any command(s) into an execution
-of the file `console.py` at the command line.
+The HolbertonBnB console supports both interactive and non-interactive modes.
+In non-interactive mode, pipe commands into the execution of `console.py`:
 
 ```
 $ echo "help" | ./console.py
@@ -59,22 +53,20 @@ EOF  all  count  create  destroy  help  quit  show  update
 $
 ```
 
-Alternatively, to use the HolbertonBnB console in interactive mode, run the
-file `console.py` by itself:
+Alternatively, run `console.py` by itself for interactive mode:
 
 ```
 $ ./console.py
 ```
 
-While running in interactive mode, the console displays a prompt for input:
+In interactive mode, a prompt (hbnb) awaits input:
 
 ```
 $ ./console.py
 (hbnb)
 ```
 
-To quit the console, enter the command `quit`, or input an EOF signal
-(`ctrl-D`).
+To exit, use the `quit` command or enter an EOF signal (Ctrl+D):
 
 ```
 $ ./console.py
@@ -90,13 +82,12 @@ $
 
 ### Console Commands
 
-The HolbertonBnB console supports the following commands:
+The HolbertonBnB console supports the several commands:
 
 * **create**
   * Usage: `create <class>`
 
-Creates a new instance of a given class. The class' ID is printed and
-the instance is saved to the file `file.json`.
+Creates a new instance of a given class, printing its ID and saving it to `file.json`.
 
 ```
 $ ./console.py
@@ -133,8 +124,7 @@ c3240b29f46', 'created_at': datetime.datetime(2019, 2, 17, 21, 34, 3, 635828),
 * **destroy**
   * Usage: `destroy <class> <id>` or `<class>.destroy(<id>)`
 
-Deletes a class instance based on a given id. The storage file `file.json`
-is updated accordingly.
+Deletes a class instance based on a given ID, updating `file.json` accordingly.
 
 ```
 $ ./console.py
@@ -153,8 +143,7 @@ $ cat file.json ; echo ""
 * **all**
   * Usage: `all` or `all <class>` or `<class>.all()`
 
-Prints the string representations of all instances of a given class. If no
-class name is provided, the command prints all instances of every class.
+Prints the string representations of all instances of a given class. If no class name is provided, all instances of every class are printed.
 
 ```
 $ ./console.py
@@ -276,6 +265,6 @@ Alternatively, you can specify a single test file to run at a time:
 $ python3 unittest -m tests/test_console.py
 ```
 
-## Authors :black_nib:
+## Authors
 * **Florian Meignan** <[FlorianM-C22](https://github.com/florianm-c22)>
 * **Florian Vandeville** <[VandevilleF](https://github.com/vandevillef)>
