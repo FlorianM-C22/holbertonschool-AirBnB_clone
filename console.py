@@ -127,30 +127,30 @@ class HBNBCommand(cmd.Cmd):
         """
         Updates an instance based on the class name and id
         """
-        args = arg.split()
-        if not args:
+        args_list = shlex.split(arg)
+        if not args_list:
             print("** class name missing **")
             return
         try:
-            class_name = args[0]
-            if class_name not in storage.classes():
+            class_name = args_list[0]
+            if class_name not in HBNBCommand.class_dict:
                 print("** class doesn't exist **")
                 return
-            if len(args) < 2:
+            if len(args_list) < 2:
                 print("** instance id missing **")
                 return
             instances = storage.all()
-            key = "{}.{}".format(class_name, args[1])
+            key = "{}.{}".format(class_name, args_list[1])
             if key not in instances:
                 print("** no instance found **")
                 return
-            if len(args) < 3:
+            if len(args_list) < 3:
                 print("** attribute name missing **")
                 return
-            if len(args) < 4:
+            if len(args_list) < 4:
                 print("** value missing **")
                 return
-            setattr(instances[key], args[2], args[3].strip('"'))
+            setattr(instances[key], args_list[2], args_list[3].strip('"'))
             storage.save()
         except Exception:
             pass
