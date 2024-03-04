@@ -33,9 +33,7 @@ class FileStorage:
             json.dump({k: v.to_dict() for k, v in self.__objects.items()}, f)
 
     def reload(self):
-        """
-        Deserializes the JSON file to __objects
-        """
+        """Deserializes the JSON file to __objects"""
         try:
             with open(self.__file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
@@ -44,4 +42,6 @@ class FileStorage:
                     inst_cls = eval(cls_name)(**value)
                     self.__objects[key] = inst_cls
         except FileNotFoundError:
+            pass
+        except json.JSONDecodeError:
             pass
