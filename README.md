@@ -277,5 +277,5 @@ $ python3 unittest -m tests/test_console.py
 ```
 
 ## Authors :black_nib:
-* **Florian Meignan** <[bdbaraban](https://github.com/florianm-c22)>
-* **Florian Vandeville** <[sazad44](https://github.com/vandevillef)>
+* **Florian Meignan** <[FlorianM-C22](https://github.com/florianm-c22)>
+* **Florian Vandeville** <[VandevilleF](https://github.com/vandevillef)>
