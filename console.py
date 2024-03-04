@@ -82,6 +82,22 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
+    def do_all(self, arg):
+        """Prints all string representation"""
+        args_list = shlex.split(arg)
+        obj_list = []
+        if len(args_list) == 0:
+            for obj in storage.all().value():
+                obj_list.append(str(obj))
+            print(obj_list)
+        elif args_list[0] not in HBNBCommand.class_dict:
+            print("** class doesn't exist **")
+        else:
+            cls_name = args_list[0]
+            for key, obj in storage.all().items():
+                if type(obj).__name__ == cls_name:
+                    obj_list.append(str(obj))
+            print(obj_list)
 
 if __name__ == '__main__':
     try:
