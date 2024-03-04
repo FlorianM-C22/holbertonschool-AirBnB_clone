@@ -27,6 +27,7 @@ class HBNBCommand(cmd.Cmd):
         "City": City,
         "Amenity": Amenity,
         "Place": Place,
+        "Review": Review,
     }
 
     def do_quit(self, arg):
