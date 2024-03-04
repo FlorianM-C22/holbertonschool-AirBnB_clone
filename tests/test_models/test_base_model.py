@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Unittest for class BaseModel"""
 import unittest
 import time
 from datetime import datetime
@@ -6,7 +7,9 @@ from models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
-
+    """
+    Test cases for the BaseModel class.
+    """
     def test_init_with_arguments(self):
         my_model = BaseModel(id='123', created_at='2022-01-01T00:00:00',
                              updated_at='2022-01-01T00:00:00')

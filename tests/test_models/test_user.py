@@ -1,10 +1,14 @@
+#!/usr/bin/python3
+"""Unittest for class TestUser"""
 import unittest
 from models.user import User
 from models.base_model import BaseModel
 
 
 class TestUser(unittest.TestCase):
-
+    """
+    This class contains unit tests for the User class.
+    """
     def test_inheritance(self):
         user = User()
         self.assertIsInstance(user, BaseModel)
