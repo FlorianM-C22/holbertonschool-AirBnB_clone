@@ -113,19 +113,22 @@ class HBNBCommand(cmd.Cmd):
         elif len(args_list) == 3:
             print("** value missing **")
         elif len(args_list) > 3:
-            pass
-        else:
             key = args_list[0] + "." + args_list[1]
             obj = storage.all()
             if key in obj:
                 try:
-                    value = type(getattr(obj[key], args_list[2]))(args_list[3])
-                    setattr(obj[key], args_list[2], value)
+                    if args_list[2] not in obj[key].__dict__:
+                        obj[key].__dict__[args_list[2]] = args_list[3]
+                    else:
+                        value = type(getattr(obj[key], args_list[2]))
+                        (args_list[3])
+                        setattr(obj[key], args_list[2], value)
                     obj[key].save()
                 except AttributeError:
                     pass
             else:
                 print("** no instance found **")
+
 
 if __name__ == '__main__':
     try:
