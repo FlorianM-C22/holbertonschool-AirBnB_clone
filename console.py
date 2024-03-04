@@ -4,6 +4,7 @@ Console Module
 """
 import cmd
 import sys
+import shlex
 from models.base_model import BaseModel
 from models import storage
 
@@ -13,6 +14,9 @@ class HBNBCommand(cmd.Cmd):
     Console class
     """
     prompt = "(hbnb) "
+    class_dict = {
+        "BaseModel": BaseModel,
+    }
 
     def do_quit(self, arg):
         """
@@ -37,15 +41,20 @@ class HBNBCommand(cmd.Cmd):
         """
         Creates a new instance of BaseModel
         """
-        if not arg:
+        args_list = shlex.split(arg)
+        if len(args_list) == 0:
             print("** class name missing **")
             return
-        try:
-            new_instance = eval(arg)()
-            new_instance.save()
-            print(new_instance.id)
-        except NameError:
-            print("** class doesn't exist **")
+        else:
+            class_name = args_list[0]
+            if class_name not in HBNBCommand.class_dict:
+                print("** class doesn't exist **")
+                return
+            else:
+                obj = HBNBCommand.class_dict[class_name]()
+                storage.new(obj)
+                storage.save()
+                print(obj.id)
 
     def do_show(self, arg):
         """
