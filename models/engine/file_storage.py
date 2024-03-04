@@ -2,7 +2,6 @@
 """FileStorage class module"""
 
 import json
-from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -34,6 +33,7 @@ class FileStorage:
 
     def reload(self):
         """Deserializes the JSON file to __objects"""
+        from models.base_model import BaseModel
         try:
             with open(self.__file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
@@ -42,6 +42,4 @@ class FileStorage:
                     inst_cls = eval(cls_name)(**value)
                     self.__objects[key] = inst_cls
         except FileNotFoundError:
-            pass
-        except json.JSONDecodeError:
             pass
