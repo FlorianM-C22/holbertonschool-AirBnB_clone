@@ -112,16 +112,16 @@ class HBNBCommand(cmd.Cmd):
         """
         Prints all string representation of all instances
         """
-        args = arg.split()
+        args_list = shlex.split(arg)
         instances = storage.all()
         if not arg:
             print([str(value) for value in instances.values()])
             return
-        if args[0] not in storage.classes():
+        if args_list[0] not in HBNBCommand.class_dict:
             print("** class doesn't exist **")
             return
         print([str(value) for key, value in instances.items()
-               if args[0] in key])
+               if args_list[0] in key])
 
     def do_update(self, arg):
         """
