@@ -2,7 +2,7 @@
 """FileStorage class module"""
 
 import json
-
+from models.base_model import BaseModel
 
 class FileStorage:
     """
@@ -37,6 +37,10 @@ class FileStorage:
         """
         try:
             with open(self.__file_path, "r", encoding="utf-8") as f:
-                self.__objects = json.load(f)
+                data = json.load(f)
+                for key, value in data.items():
+                    cls_name, obj_id = key.split('.')
+                    inst_cls = eval(cls_name)(**value)
+                    self.__objects[key] = inst_cls
         except FileNotFoundError:
             pass
