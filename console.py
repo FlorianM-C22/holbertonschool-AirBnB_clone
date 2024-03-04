@@ -47,6 +47,41 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
                 print(obj.id)
 
+    def do_show(self, arg):
+        """Prints the string representation of an instance
+        based on the class name and id."""
+        args_list = shlex.split(arg)
+        if len(args_list) == 0:
+            print("** class name missing **")
+        elif args_list[0] not in HBNBCommand.class_dict:
+            print("** class doesn't exist **")
+        elif len(args_list) == 1:
+            print("** instance id missing **")
+        else:
+            key = args_list[0] + "." + args_list[1]
+            obj = storage.all()
+            if key in obj:
+                print(obj[key])
+            else:
+                print("** no instance found **")
+
+    def do_destroy(self, arg):
+        """Deletes an instance based on the class name and id."""
+        args_list = shlex.split(arg)
+        if len(args_list) == 0:
+            print("** class name missing **")
+        elif args_list[0] not in HBNBCommand.class_dict:
+            print("** class doesn't exist **")
+        elif len(args_list) == 1:
+            print("** instance id missing **")
+        else:
+            key = args_list[0] + "." + args_list[1]
+            obj = storage.all()
+            if key in obj:
+                del (obj[key])
+            else:
+                print("** no instance found **")
+
 
 if __name__ == '__main__':
     try:
