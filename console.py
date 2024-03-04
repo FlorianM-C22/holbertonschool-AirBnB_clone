@@ -4,6 +4,9 @@
 import cmd
 from models import storage
 from models.base_model import BaseModel
+CLASS_NAMES = [
+    'BaseModel', 'User', 'Place', 'State', 'City', 'Amenity', 'Review'
+    ]
 
 
 class HBNBCommand(cmd.Cmd):
@@ -47,87 +50,104 @@ class HBNBCommand(cmd.Cmd):
                 print(obj.id)
 
     def do_show(self, arg):
-        """Prints the string representation of an instance
-        based on the class name and id."""
-        args_list = arg.split()
-        if len(args_list) == 0:
+        """
+        Prints the string representation of an instance
+        """
+        args = arg.split()
+        if not args:
             print("** class name missing **")
-        elif args_list[0] not in HBNBCommand.class_dict:
-            print("** class doesn't exist **")
-        elif len(args_list) == 1:
-            print("** instance id missing **")
-        else:
-            key = args_list[0] + "." + args_list[1]
-            obj = storage.all()
-            if key in obj:
-                print(obj[key])
-            else:
+            return
+        try:
+            class_name = args[0]
+            if class_name not in CLASS_NAMES:
+                print("** class doesn't exist **")
+                return
+            if len(args) < 2:
+                print("** instance id missing **")
+                return
+            instances = storage.all()
+            key = "{}.{}".format(class_name, args[1])
+            if key not in instances:
                 print("** no instance found **")
+                return
+            print(instances[key])
+        except Exception as e:
+            print(f"Error: {e}")
 
     def do_destroy(self, arg):
-        """Deletes an instance based on the class name and id."""
-        args_list = arg.split()
-        if len(args_list) == 0:
+        """
+        Deletes an instance based on the class name and id
+        """
+        args = arg.split()
+        if not args:
             print("** class name missing **")
-        elif args_list[0] not in HBNBCommand.class_dict:
-            print("** class doesn't exist **")
-        elif len(args_list) == 1:
-            print("** instance id missing **")
-        else:
-            key = args_list[0] + "." + args_list[1]
-            obj = storage.all()
-            if key in obj:
-                del obj[key]
-            else:
+            return
+        try:
+            class_name = args[0]
+            if class_name not in CLASS_NAMES:
+                print("** class doesn't exist **")
+                return
+            if len(args) < 2:
+                print("** instance id missing **")
+                return
+            instances = storage.all()
+            key = "{}.{}".format(class_name, args[1])
+            if key not in instances:
                 print("** no instance found **")
+                return
+            del instances[key]
+            storage.save()
+        except Exception as e:
+            print(f"Error: {e}")
 
     def do_all(self, arg):
-        """Prints all string representation"""
-        args_list = arg.split()
-        obj_list = []
-        if len(args_list) == 0:
-            for obj in storage.all().values():
-                obj_list.append(str(obj))
-            print(obj_list)
-        elif args_list[0] not in HBNBCommand.class_dict:
-            print("** class doesn't exist **")
-        else:
-            cls_name = args_list[0]
-            for key, obj in storage.all().items():
-                if type(obj).__name__ == cls_name:
-                    obj_list.append(str(obj))
-            print(obj_list)
+        """
+        Prints all string representation of all instances
+        """
+        args = arg.split()
+        try:
+            instances = storage.all()
+            if not arg:
+                print([str(value) for value in instances.values()])
+                return
+            if args[0] not in CLASS_NAMES:
+                print("** class doesn't exist **")
+                return
+            print([str(value) for key, value in instances.items() if args[0] in key])
+        except Exception as e:
+            print(f"Error: {e}")
 
     def do_update(self, arg):
-        """Updates an instance based on the class name and id"""
-        args_list = arg.split()
-        if len(args_list) == 0:
+        """
+        Updates an instance based on the class name and id
+        """
+        args = arg.split()
+        if not args:
             print("** class name missing **")
             return
-        elif args_list[0] not in HBNBCommand.class_dict:
-            print("** class doesn't exist **")
-            return
-        elif len(args_list) == 1:
-            print("** instance id missing **")
-            return
-        elif len(args_list) == 2:
-            print("** attribute name missing **")
-            return
-        elif len(args_list) == 3:
-            print("** value missing **")
-            return
-        elif len(args_list) > 3:
-            key = args_list[0] + "." + args_list[1]
-            obj = storage.all()
-            if key in obj:
-                try:
-                    setattr(obj[key], args_list[2], args_list[3])
-                    obj[key].save()
-                except AttributeError:
-                    pass
-            else:
+        try:
+            class_name = args[0]
+            if class_name not in CLASS_NAMES:
+                print("** class doesn't exist **")
+                return
+            if len(args) < 2:
+                print("** instance id missing **")
+                return
+            instances = storage.all()
+            key = "{}.{}".format(class_name, args[1])
+            if key not in instances:
                 print("** no instance found **")
-        storage.save()
+                return
+            if len(args) < 3:
+                print("** attribute name missing **")
+                return
+            if len(args) < 4:
+                print("** value missing **")
+                return
+            setattr(instances[key], args[2], args[3].strip('"'))
+            storage.save()
+        except Exception as e:
+            print(f"Error: {e}")
 
 
 if __name__ == '__main__':
