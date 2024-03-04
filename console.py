@@ -2,12 +2,22 @@
 """HBNBCommand class module"""
 
 import cmd
+from models import storage
 from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
     """HBNBCommand class"""
     prompt = '(hbnb) '
+    class_dict = {
+        "BaseModel": BaseModel,
+        #"User": User,
+        #"State": State,
+        #"City": City,
+        #"Amenity": Amenity,
+        #"Place": Place,
+        #"Review": Review
+    }
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
@@ -23,14 +33,18 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel, saves it and prints the id."""
-        if not arg:
+        args_list = arg.split()
+        if len(args_list) == 0:
             print("** class name missing **")
-        elif arg != "BaseModel":
-            print("** class doesn't exist **")
         else:
-            new_instance = BaseModel()
-            new_instance.save()
-            print(new_instance.id)
+            class_name = args_list[0]
+            if class_name not in HBNBCommand.class_dict:
+                print("** class doesn't exist **")
+            else:
+                obj = HBNBCommand.class_dict[class_name]()
+                storage.new(obj)
+                storage.save()
+                print(obj.id)
 
 
 if __name__ == '__main__':
