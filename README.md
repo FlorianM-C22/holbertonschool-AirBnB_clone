@@ -9,6 +9,7 @@
 
 
 ## Table of Content
+* [Installation](#installation)
 * [Description](#description)
 * [Storage](#storage)
 * [Console](#console)
