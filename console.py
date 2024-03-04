@@ -2,6 +2,7 @@
 """HBNBCommand class module"""
 
 import cmd
+import shlex
 from models import storage
 from models.base_model import BaseModel
 
@@ -33,7 +34,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel, saves it and prints the id."""
-        args_list = arg.split()
+        args_list = shlex.split(arg)
         if len(args_list) == 0:
             print("** class name missing **")
         else:
