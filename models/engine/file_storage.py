@@ -1,5 +1,10 @@
 #!/usr/bin/python3
-"""FileStorage class module"""
+"""
+-
+FileStorage class module
+-
+"""
+
 
 import json
 
@@ -32,7 +37,9 @@ class FileStorage:
             json.dump({k: v.to_dict() for k, v in self.__objects.items()}, f)
 
     def reload(self):
-        """Deserializes the JSON file to __objects"""
+        """
+        Deserializes the JSON file to __objects
+        """
         from models.base_model import BaseModel
         from models.user import User
         from models.state import State
