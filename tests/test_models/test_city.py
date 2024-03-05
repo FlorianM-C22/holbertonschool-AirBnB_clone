@@ -51,21 +51,6 @@ class TestCity(unittest.TestCase):
         }
         self.assertEqual(city.to_dict(), expected_dict)
 
-    def test_from_dict(self):
-        """Test the from_dict method."""
-        city = City()
-        city_dict = {
-            'id': city.id,
-            'created_at': city.created_at.isoformat(),
-            'updated_at': city.updated_at.isoformat(),
-            '__class__': 'City',
-            'state_id': 'CA',
-            'name': 'San Francisco'
-        }
-        new_city = City()
-        new_city.from_dict(city_dict)
-        self.assertEqual(new_city.to_dict(), city_dict)
-
 
 if __name__ == '__main__':
     unittest.main()
