@@ -10,6 +10,7 @@ class TestState(unittest.TestCase):
     Test cases for the State class.
     """
     def test_attributes(self):
+        """Test that State has the expected attributes."""
         state = State()
 
         self.assertTrue(hasattr(state, 'name'))
@@ -17,6 +18,7 @@ class TestState(unittest.TestCase):
         self.assertEqual(state.name, "")
 
     def test_inheritance(self):
+        """Test that State inherits from BaseModel."""
         state = State()
         self.assertIsInstance(state, BaseModel)
 

@@ -11,19 +11,23 @@ class TestAmenity(unittest.TestCase):
     """
 
     def test_inheritance(self):
+        """Test that Amenity inherits from BaseModel."""
         amenity = Amenity()
         self.assertIsInstance(amenity, BaseModel)
 
     def test_name_attribute(self):
+        """Test that Amenity has a name attribute."""
         amenity = Amenity()
         self.assertEqual(amenity.name, "")
 
     def test_name_assignment(self):
+        """Test that Amenity has a name attribute."""
         amenity = Amenity()
         amenity.name = "Swimming Pool"
         self.assertEqual(amenity.name, "Swimming Pool")
 
     def test_to_dict(self):
+        """Test the to_dict method."""
         amenity = Amenity()
         amenity.name = "Gym"
         expected_dict = {

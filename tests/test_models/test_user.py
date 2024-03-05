@@ -10,10 +10,12 @@ class TestUser(unittest.TestCase):
     This class contains unit tests for the User class.
     """
     def test_inheritance(self):
+        """Test that User inherits from BaseModel."""
         user = User()
         self.assertIsInstance(user, BaseModel)
 
     def test_attributes(self):
+        """Test that User has the expected attributes."""
         user = User()
         self.assertEqual(user.email, "")
         self.assertEqual(user.password, "")
@@ -21,6 +23,7 @@ class TestUser(unittest.TestCase):
         self.assertEqual(user.last_name, "")
 
     def test_attribute_types(self):
+        """Test that User attributes are of the correct type."""
         user = User()
         self.assertIsInstance(user.email, str)
         self.assertIsInstance(user.password, str)
@@ -28,6 +31,7 @@ class TestUser(unittest.TestCase):
         self.assertIsInstance(user.last_name, str)
 
     def test_attribute_defaults(self):
+        """Test that User attributes are set to default values."""
         user = User()
         self.assertEqual(user.email, "")
         self.assertEqual(user.password, "")

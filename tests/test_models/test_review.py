@@ -10,6 +10,7 @@ class TestReview(unittest.TestCase):
     Test cases for the Review class.
     """
     def test_attributes(self):
+        """Test that Review has the expected attributes."""
         review = Review()
 
         self.assertTrue(hasattr(review, 'place_id'))
@@ -21,6 +22,7 @@ class TestReview(unittest.TestCase):
         self.assertEqual(review.text, "")
 
     def test_inheritance(self):
+        """Test that Review inherits from BaseModel."""
         review = Review()
         self.assertIsInstance(review, BaseModel)
 

@@ -10,6 +10,7 @@ class TestPlace(unittest.TestCase):
     Test cases for the Place class.
     """
     def test_attributes(self):
+        """Test that Place has the expected attributes."""
         place = Place()
 
         self.assertTrue(hasattr(place, 'city_id'))
@@ -37,6 +38,7 @@ class TestPlace(unittest.TestCase):
         self.assertEqual(place.amenity_ids, [])
 
     def test_inheritance(self):
+        """Test that Place inherits from BaseModel."""
         place = Place()
         self.assertIsInstance(place, BaseModel)
 
