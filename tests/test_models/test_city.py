@@ -51,6 +51,16 @@ class TestCity(unittest.TestCase):
         }
         self.assertEqual(city.to_dict(), expected_dict)
 
+    def test_name(self):
+        """Test for instance of City"""
+        Chicago = City()
+        self.assertEqual(Chicago.name, "")
+        self.assertEqual(Chicago.state_id, "")
+        Chicago.name = "Chicago"
+        self.assertEqual(Chicago.name, "Chicago")
+        Chicago.state_id = "illinois id"
+        self.assertEqual(Chicago.state_id, "illinois id")
+
 
 if __name__ == '__main__':
     unittest.main()
