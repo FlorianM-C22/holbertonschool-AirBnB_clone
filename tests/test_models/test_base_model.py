@@ -2,7 +2,6 @@
 """Unittest for class BaseModel"""
 import unittest
 import time
-import os
 from datetime import datetime
 from models.base_model import BaseModel
 
@@ -11,24 +10,6 @@ class TestBaseModel(unittest.TestCase):
     """
     Test cases for the BaseModel class.
     """
-    @classmethod
-    def setUpClass(cls):
-        """Class method to open test's environment"""
-        cls.base_model = BaseModel()
-        try:
-            os.rename("file.json", "test_file.json")
-        except Exception:
-            pass
-
-    @classmethod
-    def tearDownClass(cls):
-        """Class method to close test's environment"""
-        try:
-            os.remove("file.json")
-            os.rename("test_file.json", "file.json")
-        except Exception:
-            pass
-
     def test_init_with_arguments(self):
         """Test the __init__ method with valid arguments."""
         my_model = BaseModel(id='123', created_at='2022-01-01T00:00:00',
