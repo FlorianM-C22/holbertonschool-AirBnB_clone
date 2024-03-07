@@ -73,6 +73,6 @@ class TestPlace(unittest.TestCase):
         self.assertIsNotNone(Place.save.__doc__)
         self.assertIsNotNone(Place.to_dict.__doc__)
 
-        
+
 if __name__ == '__main__':
     unittest.main()
