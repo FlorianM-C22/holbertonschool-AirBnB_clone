@@ -38,6 +38,37 @@ class TestUser(unittest.TestCase):
         self.assertEqual(user.first_name, "")
         self.assertEqual(user.last_name, "")
 
+    def test_init(self):
+        """Test the __init__ method."""
+        user = User()
+        self.assertIsInstance(user, User)
+
+    def test_str(self):
+        """Test the __str__ method."""
+        user = User()
+        self.assertIsInstance(user.__str__(), str)
+
+    def test_save(self):
+        """Test the save method."""
+        user = User()
+        old_updated_at = user.updated_at
+        user.save()
+        self.assertNotEqual(user.updated_at, old_updated_at)
+
+    def test_to_dict(self):
+        """Test the to_dict method."""
+        user = User()
+        user_dict = user.to_dict()
+        self.assertEqual(type(user_dict), dict)
+
+    def test_docstring(self):
+        """Test docstrings."""
+        self.assertIsNotNone(User.__doc__)
+        self.assertIsNotNone(User.__init__.__doc__)
+        self.assertIsNotNone(User.__str__.__doc__)
+        self.assertIsNotNone(User.save.__doc__)
+        self.assertIsNotNone(User.to_dict.__doc__)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -9,6 +9,30 @@ class TestAmenity(unittest.TestCase):
     """
     Test cases for the Amenity class.
     """
+    def test_init(self):
+        """Test the __init__ method."""
+        amenity = Amenity()
+        self.assertIsInstance(amenity, Amenity)
+
+    def test_str(self):
+        """Test the __str__ method."""
+        amenity = Amenity()
+        self.assertIsInstance(amenity.__str__(), str)
+
+    def test_save(self):
+        """Test the save method."""
+        amenity = Amenity()
+        old_updated_at = amenity.updated_at
+        amenity.save()
+        self.assertNotEqual(amenity.updated_at, old_updated_at)
+
+    def test_docstring(self):
+        """Test docstrings."""
+        self.assertIsNotNone(Amenity.__doc__)
+        self.assertIsNotNone(Amenity.__init__.__doc__)
+        self.assertIsNotNone(Amenity.__str__.__doc__)
+        self.assertIsNotNone(Amenity.save.__doc__)
+        self.assertIsNotNone(Amenity.to_dict.__doc__)
 
     def test_inheritance(self):
         """Test that Amenity inherits from BaseModel."""

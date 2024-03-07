@@ -42,6 +42,37 @@ class TestPlace(unittest.TestCase):
         place = Place()
         self.assertIsInstance(place, BaseModel)
 
+    def test_init(self):
+        """Test the __init__ method."""
+        place = Place()
+        self.assertIsInstance(place, Place)
 
+    def test_str(self):
+        """Test the __str__ method."""
+        place = Place()
+        self.assertIsInstance(place.__str__(), str)
+
+    def test_save(self):
+        """Test the save method."""
+        place = Place()
+        old_updated_at = place.updated_at
+        place.save()
+        self.assertNotEqual(place.updated_at, old_updated_at)
+
+    def test_to_dict(self):
+        """Test the to_dict method."""
+        place = Place()
+        place_dict = place.to_dict()
+        self.assertEqual(type(place_dict), dict)
+
+    def test_docstring(self):
+        """Test docstrings."""
+        self.assertIsNotNone(Place.__doc__)
+        self.assertIsNotNone(Place.__init__.__doc__)
+        self.assertIsNotNone(Place.__str__.__doc__)
+        self.assertIsNotNone(Place.save.__doc__)
+        self.assertIsNotNone(Place.to_dict.__doc__)
+
+        
 if __name__ == '__main__':
     unittest.main()

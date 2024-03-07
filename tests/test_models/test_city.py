@@ -61,6 +61,31 @@ class TestCity(unittest.TestCase):
         Chicago.state_id = "illinois id"
         self.assertEqual(Chicago.state_id, "illinois id")
 
+    def test_init(self):
+        """Test the __init__ method."""
+        city = City()
+        self.assertIsInstance(city, City)
+
+    def test_str(self):
+        """Test the __str__ method."""
+        city = City()
+        self.assertIsInstance(city.__str__(), str)
+
+    def test_save(self):
+        """Test the save method."""
+        city = City()
+        old_updated_at = city.updated_at
+        city.save()
+        self.assertNotEqual(city.updated_at, old_updated_at)
+
+    def test_docstring(self):
+        """Test docstrings."""
+        self.assertIsNotNone(City.__doc__)
+        self.assertIsNotNone(City.__init__.__doc__)
+        self.assertIsNotNone(City.__str__.__doc__)
+        self.assertIsNotNone(City.save.__doc__)
+        self.assertIsNotNone(City.to_dict.__doc__)
+
 
 if __name__ == '__main__':
     unittest.main()

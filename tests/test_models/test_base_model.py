@@ -84,6 +84,18 @@ class TestBaseModel(unittest.TestCase):
         except TypeError:
             pass
 
+    def test_inheritance(self):
+        """Test that BaseModel inherits from a specific class."""
+        self.assertIsInstance(BaseModel(), BaseModel)
+
+    def test_docstring(self):
+        """Test docstrings."""
+        self.assertIsNotNone(BaseModel.__doc__)
+        self.assertIsNotNone(BaseModel.__init__.__doc__)
+        self.assertIsNotNone(BaseModel.__str__.__doc__)
+        self.assertIsNotNone(BaseModel.save.__doc__)
+        self.assertIsNotNone(BaseModel.to_dict.__doc__)
+
 
 if __name__ == '__main__':
     unittest.main()
